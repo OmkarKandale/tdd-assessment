@@ -1,23 +1,29 @@
-import java.util.Scanner;
+import java.util.Arrays;
 
 public class App {
 
     public int add(String input) {
-        return 0;
+        if(input.isEmpty()) 
+            return 0;
+        String subStr = input;
+        String delimiter = ",|\n";
+        if(input.startsWith("//")) {
+            int index = input.indexOf("\n");
+            System.out.println(index);
+            delimiter = input.substring(2, index);
+            input = input.split("\n")[1];
+        }
+        String[] splitArr = input.split(delimiter);
+        int[] numberArray = Arrays.stream(splitArr).mapToInt(Integer::parseInt).toArray();
+        return getSum(numberArray);
     }
 
-    public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        try {
-            App obj = new App();
+    private int getSum(int[] intArr) {
+        return Arrays.stream(intArr).reduce(0, (a, b) -> a + b);
+    }
 
-            String input = sc.nextLine();
-            obj.add(input);
-            System.out.println(input);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            sc.close();
-        }
+    public static void main(String[] args) {
+        App obj = new App();
+        System.out.println(obj.add("//;\n1;2"));
     }
 }
