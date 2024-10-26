@@ -1,5 +1,3 @@
-package com;
-
 import java.util.Scanner;
 
 public class App {
@@ -15,6 +13,7 @@ public class App {
 
             String input = sc.nextLine();
             obj.add(input);
+            System.out.println(input);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
